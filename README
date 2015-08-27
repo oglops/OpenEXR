@@ -1,68 +1,77 @@
-README
+ABOUT THE OPENEXR LIBRARIES
+----------------------------
 
-//
-// OpenEXR
-//
+IlmImf is our "EXR" file format for storing 16-bit FP images.  Libraries in
+this package depend on the IlmBase library.
 
+See the IlmImfExamples directory for some code that demonstrates how
+to use the IlmImf library to read and write OpenEXR files.  The doc
+directory contains some high-level documentation and history about the
+OpenEXR format.
 
-OpenEXR is a high dynamic-range (HDR) image file format developed by 
-Industrial Light & Magic (ILM) for use in computer imaging applications.  
-ILM subsequently released the source code and adjoining material as open 
-source software. 
-The distribution has evolved to include support for stereoscopic and deep 
-images.  Weta Digital, Disney, Sony Pictures Imageworks, Pixar, DreamWorks
-Animation and other studios have made contributions to the code base.
-The file format has seen wide adoption in a number of industries.
-
-The library, including all contributions, is released under the modified 
-BSD license. 
+If you have questions about using the OpenEXR libraries, you may want
+to join our developer mailing list.  See http://www.openexr.com for
+details.
 
 
-OpenEXR's features include:
+LICENSE
+-------
 
-    * Higher dynamic range and color precision than existing 8- and 10-bit 
-      image file formats.
-    * Support for 16-bit floating-point, 32-bit floating-point, and 
-      32-bit integer pixels. The 16-bit floating-point format, called "half", 
-      is compatible with the half data type in NVIDIA's Cg graphics language 
-      and is supported natively on their new GeForce FX and Quadro FX 3D 
-      graphics solutions.
-    * Multiple image compression algorithms, both lossless and lossy. Some of
-      the included codecs can achieve 2:1 lossless compression ratios on images
-      with film grain.  The lossy codecs have been tuned for visual quality and
-      decoding performance.
-    * Extensibility. New compression codecs and image types can easily be added
-      by extending the C++ classes included in the OpenEXR software distribution.
-      New image attributes (strings, vectors, integers, etc.) can be added to 
-      OpenEXR image headers without affecting backward compatibility with 
-      existing OpenEXR applications. 
-    * Support for sterescopic image workflows and a generalisation to 
-      multi-views.
-
-Added Feature highlights for v2 release
-
-    * Flexible support for deep data. Pixels can store a variable-length list of 
-      samples and, thus, it is possible to store multiple values at different 
-      depths for each pixel. Hard surfaces and volumetric data representations
-      are accomodated.
-    * Multipart. Ability to encode separate, but related, images in one file. 
-      This allows for access to individual parts without the need to read other
-      parts in the file.
-    * Versioning. OpenEXR source allows for user configurable C++
-      namespaces to provide protection when using multiple versions of the
-      library in the same process space.
-      
+The OpenEXR source code distribution is free software.  See the file
+named COPYING (included in this distribution) for details.
 
 
-The distribution is divided into the following sub-modules:
-    * IlmBase
-    * OpenEXR
-    * OpenEXR_Viewers
-    * PyIlmBase
-    * Contrib
-    
-Please see the README files of each of the individual directories for more
-information.
+BUILDING OPENEXR
+----------------
 
-A collection of OpenEXR images are available from the adjecent repository:
- openexr-images
+Building OpenEXR requires the IlmBase and the zlib library.
+
+You can obtain the source code for zlib from:
+
+   http://www.zlib.net
+
+If you're building OpenEXR on a Windows platform, see README.win32 for
+instructions on how to build OpenEXR.  The remainder of this file
+applies only to GNU/Linux or other UNIX-like systems.
+
+After installing the required libraries, to build OpenEXR on
+GNU/Linux or other UNIX-like systems, do this:
+
+./configure
+make
+make install
+
+unless you obtained IlmBase directly from git, in which case you
+should first read README.git
+
+
+Please type :
+
+./configure --help
+
+for a list of options in relation to building IlmBase libraries. In 
+particular, peruse README.namespaces for information regarding the 
+use of namespaces in IlmBase and OpenEXR.
+
+See README.OSX for details on building OpenEXR in MacOS X.
+
+Do `make check` to run the OpenEXR confidence tests.  They should all
+pass; if you find a test that does not pass on your system, please let
+us know.
+
+Other UNIX variants haven't been tested, but should be easy to build.
+Let us know if you're having problems porting OpenEXR to a particular
+platform.
+
+All include files needed to use the OpenEXR libraries are installed in the 
+OpenEXR subdirectory of the install prefix, e.g. /usr/local/include/OpenEXR.
+
+
+USING OPENEXR IN YOUR APPLICATIONS
+----------------------------------
+
+On systems with support for pkg-config, use `pkg-config --cflags
+OpenEXR` for the C++ flags required to compile against OpenEXR
+headers; and `pkg-config --libs OpenEXR` for the linker flags required
+to link against OpenEXR libraries.
+
