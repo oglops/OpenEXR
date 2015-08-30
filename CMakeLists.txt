@@ -26,7 +26,10 @@ set(CPACK_SOURCE_IGNORE_FILES
   "/.git*;/.cvs*;${CPACK_SOURCE_IGNORE_FILES}")
 INCLUDE ( CPack )
 
-
+# disable some warning
+set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${DISABLE_WARNING}")
+message("========================= in contrib/OpenEXR-2.2.0/CMakeLists.txt =========================")
+message("CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
 
 # Allow the developer to select if Dynamic or Static libraries are built
 OPTION (BUILD_SHARED_LIBS    "Build Shared Libraries" ON)
